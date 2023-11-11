@@ -7,7 +7,7 @@ const router = Router();
 
 const getAllTemperaments = async (req, res) => {
   const temperamentsApi = await axios.get(
-    `https://api.thedogapi.com/v1/breeds?key=${api_key}`
+    `https://api.thedogapi.com/v1/breeds?key=live_WieegZGLHwyHTqSdSiRx3TvTfb1gHSHAZkOTHRCTYMLr13SFNkBLeK9uq4Z7K5Nx`
   );
   const temperaments = temperamentsApi.data
     .map((el) => el.temperament)
