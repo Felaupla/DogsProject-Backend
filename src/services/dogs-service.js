@@ -11,7 +11,7 @@ const getApiInfo = async () => {
     
     const apiInfo = apiUrl.data.map((el) => {
       // Constructing the full image URL
-      const imageUrl = `https://cdn.thedogapi.com/images/${el.reference_image_id}.jpg`;
+      const imageUrl = `https://cdn2.thedogapi.com/images/${el.reference_image_id}.jpg`;
 
       return {
         id: el.id,
