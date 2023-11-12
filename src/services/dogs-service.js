@@ -19,7 +19,7 @@ const getApiInfo = async () => {
         height: `${el.height.metric} cm`,
         weight: `${el.weight.metric} kgs`,
         life_span: el.life_span,
-        image: el.imageUrl, // Use the constructed URL here
+        image: imageUrl, // Use the constructed URL here
         temperament: el.temperament,
       };
     });
