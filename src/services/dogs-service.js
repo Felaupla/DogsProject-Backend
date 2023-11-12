@@ -14,7 +14,7 @@ const getApiInfo = async () => {
       height: el.height.metric.concat(" cm"),
       weight: el.weight.metric.concat(" kgs"),
       life_span: el.life_span,
-      image: el.image,
+      image: el.reference_image_id,
       temperament: el.temperament,
     };
   });
