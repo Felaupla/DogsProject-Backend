@@ -4,21 +4,31 @@ const { Dog, Temperament } = require("../db");
 const { api_key } = process.env;
 
 const getApiInfo = async () => {
-  const apiUrl = await axios.get(
-    `https://api.thedogapi.com/v1/breeds?key=live_WieegZGLHwyHTqSdSiRx3TvTfb1gHSHAZkOTHRCTYMLr13SFNkBLeK9uq4Z7K5Nx`
-  );
-  const apiInfo = await apiUrl.data.map((el) => {
-    return {
-      id: el.id,
-      name: el.name,
-      height: el.height.metric.concat(" cm"),
-      weight: el.weight.metric.concat(" kgs"),
-      life_span: el.life_span,
-      image: el.reference_image_id,
-      temperament: el.temperament,
-    };
-  });
-  return apiInfo;
+  try {
+    const apiUrl = await axios.get(
+      `https://api.thedogapi.com/v1/breeds?key=live_WieegZGLHwyHTqSdSiRx3TvTfb1gHSHAZkOTHRCTYMLr13SFNkBLeK9uq4Z7K5Nx`
+    );
+    
+    const apiInfo = apiUrl.data.map((el) => {
+      // Constructing the full image URL
+      const imageUrl = `https://cdn.thedogapi.com/images/${el.reference_image_id}.jpg`;
+
+      return {
+        id: el.id,
+        name: el.name,
+        height: `${el.height.metric} cm`,
+        weight: `${el.weight.metric} kgs`,
+        life_span: el.life_span,
+        image: imageUrl, // Use the constructed URL here
+        temperament: el.temperament,
+      };
+    });
+
+    return apiInfo;
+  } catch (error) {
+    console.error("Error fetching API:", error);
+    throw error;
+  }
 };
 
 const getDbInfo = async () => {
