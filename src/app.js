@@ -10,12 +10,16 @@ const server = express();
 
 server.name = "API";
 
+// Configuración de middlewares
 server.use(bodyParser.urlencoded({ extended: true, limit: "50mb" }));
 server.use(bodyParser.json({ limit: "50mb" }));
 server.use(cookieParser());
 server.use(morgan("dev"));
+
+// Configuración de CORS
 server.use((req, res, next) => {
-  res.header("Access-Control-Allow-Origin", "https://dogsproject.vercel.app"); // update to match the domain you will make the request from
+  // Permitir solicitudes desde https://dogsproject.vercel.app
+  res.header("Access-Control-Allow-Origin", "https://dogsproject.vercel.app"); 
   res.header("Access-Control-Allow-Credentials", "true");
   res.header(
     "Access-Control-Allow-Headers",
@@ -25,11 +29,11 @@ server.use((req, res, next) => {
   next();
 });
 
+// Rutas
 server.use("/", routes);
 
-// Error catching endware.
-server.use((err, req, res, next) => {
-  // eslint-disable-line no-unused-vars
+// Manejador de errores
+server.use((err, req, res, next) => {  // eslint-disable-line no-unused-vars
   const status = err.status || 500;
   const message = err.message || err;
   console.error(err);
